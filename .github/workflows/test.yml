@@ -60,7 +60,7 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
-          ${{ runner.temp }}\scanner\dotnet-sonarscanner begin /k:"hollowbytes_hb-dotnet-bff" /o:"hollowbytes" /d:sonar.token=$env:SONAR_TOKEN" /d:sonar.cs.vscoveragexml.reportsPaths="coverage.xml"
+          ${{ runner.temp }}\scanner\dotnet-sonarscanner begin /k:"hollowbytes_hb-dotnet-bff" /o:"hollowbytes" /d:sonar.token="$env:SONAR_TOKEN" /d:sonar.cs.vscoveragexml.reportsPaths="coverage.xml"
         shell: powershell
 
       - name: Restore the project
