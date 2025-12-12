@@ -16,3 +16,4 @@ jobs:
     uses: hollowbytes/hb-shared-workflows/.github/workflows/ci-dotnet-test.yml@main
     with:
       dotnet-version: ${{ matrix.dotnet-version }}
+    secrets: inherit
