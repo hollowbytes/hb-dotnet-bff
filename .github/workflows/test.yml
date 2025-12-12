@@ -9,7 +9,7 @@ on:
     types: [opened, synchronize, reopened]
 
 jobs:
-  build-and-publish:
+  test-and-scan:
     strategy:
       matrix:
         dotnet-version: ['10.0.x' ]
