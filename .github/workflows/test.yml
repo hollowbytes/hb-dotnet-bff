@@ -57,8 +57,10 @@ jobs:
           dotnet tool update dotnet-sonarscanner --tool-path ${{ runner.temp }}\scanner
       
       - name: Start SonarCloud analysis
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
-          ${{ runner.temp }}\scanner\dotnet-sonarscanner begin /k:"hollowbytes_hb-dotnet-bff" /o:"hollowbytes" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.cs.vscoveragexml.reportsPaths="coverage.xml"
+          ${{ runner.temp }}\scanner\dotnet-sonarscanner begin /k:"hollowbytes_hb-dotnet-bff" /o:"hollowbytes" /d:sonar.token="$SONAR_TOKEN" /d:sonar.cs.vscoveragexml.reportsPaths="coverage.xml"
         shell: powershell
 
       - name: Restore the project
@@ -82,6 +84,8 @@ jobs:
         shell: powershell
 
       - name: Pass coverage report path to SonarScanner
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
-          ${{ runner.temp }}\scanner\dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
+          ${{ runner.temp }}\scanner\dotnet-sonarscanner end /d:sonar.token="$SONAR_TOKEN"
         shell: powershell          
