@@ -60,22 +60,25 @@ jobs:
         run: |
           ${{ runner.temp }}\scanner\dotnet-sonarscanner begin /k:"hollowbytes_hb-dotnet-bff" /o:"hollowbytes" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.cs.vscoveragexml.reportsPaths="coverage.xml"
         shell: powershell
-        
-      - name: Build the project
+
+      - name: Restore the project
         run: |
           dotnet restore
+          
+        shell: powershell
+      - name: Build the project
+        run: |
           dotnet build --no-restore
         shell: powershell
 
-      - name: Run tests with coverage and publish TRX report
+      - name: Run tests with coverage
         run: |
           dotnet test --no-build --verbosity normal --collect:"Code Coverage" --logger "trx;LogFileName=testresults.trx"
         shell: powershell
 
-      - name: Merge coverage files into a single coverage.xml (Optional but Recommended)
-        # This step might be necessary if tests are across multiple assemblies or environments
+      - name: Merge coverage files
         run: |
-          &dotnet-coverage merge -o coverage.xml -f xml .\**\*.coverage
+          dotnet-coverage merge -o coverage.xml -f xml .\**\*.coverage
         shell: powershell
 
       - name: Pass coverage report path to SonarScanner
