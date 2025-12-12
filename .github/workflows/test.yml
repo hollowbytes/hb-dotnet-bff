@@ -34,11 +34,16 @@ jobs:
       - name: Install dependencies
         run: dotnet restore
         
+      - name: Install tools
+        run: |
+          dotnet tool install --global dotnet-coverage
+          dotnet tool install --global dotnet-coverage
+        
       - name: Build
         run: dotnet build --no-restore
         
       - name: Test with dotnet
-        run: dotnet test --no-restore --logger trx --results-directory "TestResults-${{ matrix.dotnet-version }}"
+        run: dotnet-coverage collect "dotnet test --no-restore --logger trx --results-directory \"TestResults-${{ matrix.dotnet-version }}\"" -f xml -o "coverage.xml"
         
       - name: Upload dotnet test results
         uses: actions/upload-artifact@v4
