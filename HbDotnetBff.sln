@@ -1,18 +1,22 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HbDotnetBff", "HbDotnetBff\HbDotnetBff.csproj", "{8D21B062-C2EB-475C-8156-CD4B5D8C1041}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HbDotnetBff", "src\HbDotnetBff\HbDotnetBff.csproj", "{8D21B062-C2EB-475C-8156-CD4B5D8C1041}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HbDotnetBff.Application", "HbDotnetBff.Application\HbDotnetBff.Application.csproj", "{15C17403-8100-4EF9-B018-7928AEBC3419}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HbDotnetBff.Application", "src\HbDotnetBff.Application\HbDotnetBff.Application.csproj", "{15C17403-8100-4EF9-B018-7928AEBC3419}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HbDotnetBff.Domain", "HbDotnetBff.Domain\HbDotnetBff.Domain.csproj", "{9781A8CE-B0D2-42FE-9FB7-CCB3524BEC60}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HbDotnetBff.Domain", "src\HbDotnetBff.Domain\HbDotnetBff.Domain.csproj", "{9781A8CE-B0D2-42FE-9FB7-CCB3524BEC60}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HbDotnetBff.Infrastructure", "HbDotnetBff.Infrastructure\HbDotnetBff.Infrastructure.csproj", "{29F87752-1CD6-499C-99F6-BF4C87B00523}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HbDotnetBff.Infrastructure", "src\HbDotnetBff.Infrastructure\HbDotnetBff.Infrastructure.csproj", "{29F87752-1CD6-499C-99F6-BF4C87B00523}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HbDotnetBff.Application.Tests", "HbDotnetBff.Application.Tests\HbDotnetBff.Application.Tests.csproj", "{59D74789-5517-4C25-A6F2-1DDBCA400D9D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HbDotnetBff.Application.Tests", "tests\HbDotnetBff.Application.Tests\HbDotnetBff.Application.Tests.csproj", "{59D74789-5517-4C25-A6F2-1DDBCA400D9D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HbDotnetBff.Domain.Tests", "HbDotnetBff.Domain.Tests\HbDotnetBff.Domain.Tests.csproj", "{20AD74FD-4417-445A-8948-EF822D9FF2BA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HbDotnetBff.Domain.Tests", "tests\HbDotnetBff.Domain.Tests\HbDotnetBff.Domain.Tests.csproj", "{20AD74FD-4417-445A-8948-EF822D9FF2BA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HbDotnetBff.Infrastructure.Tests", "HbDotnetBff.Infrastructure.Tests\HbDotnetBff.Infrastructure.Tests.csproj", "{ECB39105-B30F-4864-B802-97EB42333126}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HbDotnetBff.Infrastructure.Tests", "tests\HbDotnetBff.Infrastructure.Tests\HbDotnetBff.Infrastructure.Tests.csproj", "{ECB39105-B30F-4864-B802-97EB42333126}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{ABB12899-248F-47E3-8EFF-BE852C38CC8A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{6480B272-30B6-4581-BDCD-33B651AE8E44}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -48,5 +52,14 @@ Global
 		{ECB39105-B30F-4864-B802-97EB42333126}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ECB39105-B30F-4864-B802-97EB42333126}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ECB39105-B30F-4864-B802-97EB42333126}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{ECB39105-B30F-4864-B802-97EB42333126} = {6480B272-30B6-4581-BDCD-33B651AE8E44}
+		{20AD74FD-4417-445A-8948-EF822D9FF2BA} = {6480B272-30B6-4581-BDCD-33B651AE8E44}
+		{59D74789-5517-4C25-A6F2-1DDBCA400D9D} = {6480B272-30B6-4581-BDCD-33B651AE8E44}
+		{8D21B062-C2EB-475C-8156-CD4B5D8C1041} = {ABB12899-248F-47E3-8EFF-BE852C38CC8A}
+		{15C17403-8100-4EF9-B018-7928AEBC3419} = {ABB12899-248F-47E3-8EFF-BE852C38CC8A}
+		{9781A8CE-B0D2-42FE-9FB7-CCB3524BEC60} = {ABB12899-248F-47E3-8EFF-BE852C38CC8A}
+		{29F87752-1CD6-499C-99F6-BF4C87B00523} = {ABB12899-248F-47E3-8EFF-BE852C38CC8A}
 	EndGlobalSection
 EndGlobal

@@ -19,7 +19,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\HbDotnetBff.Domain\HbDotnetBff.Domain.csproj" />
+      <ProjectReference Include="..\..\src\HbDotnetBff.Domain\HbDotnetBff.Domain.csproj" />
     </ItemGroup>
 
 </Project>

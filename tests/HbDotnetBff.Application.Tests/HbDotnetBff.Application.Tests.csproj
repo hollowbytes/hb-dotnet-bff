@@ -19,7 +19,8 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\HbDotnetBff.Infrastructure\HbDotnetBff.Infrastructure.csproj" />
+      <ProjectReference Include="..\..\src\HbDotnetBff.Application\HbDotnetBff.Application.csproj" />
     </ItemGroup>
+
 
 </Project>
