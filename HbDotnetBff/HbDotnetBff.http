@@ -1,0 +1,6 @@
+@HbDotnetBff_HostAddress = http://localhost:5082
+
+GET {{HbDotnetBff_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
