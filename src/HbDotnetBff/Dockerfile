@@ -7,10 +7,13 @@ EXPOSE 8081
 FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["HbDotnetBff/HbDotnetBff.csproj", "HbDotnetBff/"]
-RUN dotnet restore "HbDotnetBff/HbDotnetBff.csproj"
+COPY ["src/HbDotnetBff/HbDotnetBff.csproj", "src/HbDotnetBff/"]
+COPY ["src/HbDotnetBff.Infrastructure/HbDotnetBff.Infrastructure.csproj", "src/HbDotnetBff.Infrastructure/"]
+COPY ["src/HbDotnetBff.Application/HbDotnetBff.Application.csproj", "src/HbDotnetBff.Application/"]
+COPY ["src/HbDotnetBff.Domain/HbDotnetBff.Domain.csproj", "src/HbDotnetBff.Domain/"]
+RUN dotnet restore "src/HbDotnetBff/HbDotnetBff.csproj"
 COPY . .
-WORKDIR "/src/HbDotnetBff"
+WORKDIR "/src/src/HbDotnetBff"
 RUN dotnet build "./HbDotnetBff.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish
