@@ -58,12 +58,9 @@ jobs:
       
       - name: Start SonarCloud analysis
         run: |
-          &dotnet sonarscanner begin /k:"${{ env.YOUR_PROJECT_KEY }}" /o:"${{ env.YOUR_ORGANIZATION_KEY }}" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
+          ${{ runner.temp }}\scanner\dotnet-sonarscanner begin /k:"hollowbytes_hb-dotnet-bff" /o:"hollowbytes" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.cs.vscoveragexml.reportsPaths="coverage.xml"
         shell: powershell
-        env:
-          YOUR_PROJECT_KEY: hollowbytes_hb-dotnet-bff
-          YOUR_ORGANIZATION_KEY: hollowbytes
-
+        
       - name: Build the project
         run: |
           dotnet restore
@@ -83,5 +80,5 @@ jobs:
 
       - name: Pass coverage report path to SonarScanner
         run: |
-          &dotnet sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.cs.vscoveragexml.reportsPaths="coverage.xml"
+          ${{ runner.temp }}\scanner\dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
         shell: powershell          
