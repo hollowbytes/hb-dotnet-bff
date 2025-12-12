@@ -29,6 +29,12 @@ jobs:
         with:
           dotnet-version: ${{ matrix.dotnet-version }}
 
+      - name: Install SonarScanner and dotnet-coverage global tools
+        run: |
+          dotnet tool install --global SonarScanner.DotNet
+          dotnet tool install --global dotnet-coverage
+        shell: powershell
+
       - name: Cache SonarQube Cloud packages
         uses: actions/cache@v4
         with:
@@ -51,14 +57,29 @@ jobs:
           New-Item -Path ${{ runner.temp }}\scanner -ItemType Directory
           dotnet tool update dotnet-sonarscanner --tool-path ${{ runner.temp }}\scanner
       
-      - name: Build and analyze
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        shell: powershell
+      - name: Start SonarCloud analysis
         run: |
-          ${{ runner.temp }}\scanner\dotnet-sonarscanner begin /k:"hollowbytes_hb-dotnet-bff" /o:"hollowbytes" /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
-          dotnet tool install --global dotnet-coverage
-          dotnet restore
-          dotnet build --no-restore
-          dotnet-coverage collect "dotnet test --no-restore" -f xml -o "coverage.xml"
-          ${{ runner.temp }}\scanner\dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
+          dotnet sonarscanner begin /k:"${{ env.YOUR_PROJECT_KEY }}" /o:"${{ env.YOUR_ORGANIZATION_KEY }}" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
+        shell: powershell
+        env:
+          YOUR_PROJECT_KEY: hollowbytes_hb-dotnet-bff
+          YOUR_ORGANIZATION_KEY: hollowbytes
+
+      - name: Build the project
+        run: dotnet build --no-restore
+
+      - name: Run tests with coverage and publish TRX report
+        run: |
+          dotnet test --no-build --verbosity normal --collect:"Code Coverage" --logger "trx;LogFileName=testresults.trx"
+        shell: powershell
+
+      - name: Merge coverage files into a single coverage.xml (Optional but Recommended)
+        # This step might be necessary if tests are across multiple assemblies or environments
+        run: |
+          dotnet-coverage merge -o coverage.xml -f xml .\**\*.coverage
+        shell: powershell
+
+      - name: Pass coverage report path to SonarScanner
+        run: |
+          dotnet sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.cs.vscoveragexml.reportsPaths="coverage.xml"
+        shell: powershell          
